@@ -1,0 +1,17 @@
+body {
+    font-size: 25px;
+    font-family :'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+b {
+    color: #3bbf9f;
+}
+#phpDiv {
+    display: flex;
+    justify-content: center;
+}
+.center {
+    border: 5px groove #95e6b1;
+    padding: 10px 15px 10px 15px;
+
+}
