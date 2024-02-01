@@ -15,3 +15,16 @@ b {
     padding: 10px 15px 10px 15px;
 
 }
+.spFontId {
+    font-size: 20px;
+}
+.hrLineByLoop {
+    width: 20px;
+    height: 2px;
+    background-color:#19735c;
+    margin: 10px auto 0 auto;
+}
+.eleRunImg {
+    width: auto;
+    height: 250px
+}

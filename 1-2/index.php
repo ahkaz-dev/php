@@ -5,25 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        body {
-            font-size: 25px;
-            font-family :'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-        }
-        b {
-            color: #3bbf9f;
-        }
-        #phpDiv {
-            display: flex;
-            justify-content: center;
-        }
-        .center {
-            border: 5px groove #95e6b1;
-            padding: 10px 15px 10px 15px;
-
-        }
-    </style>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <div id="phpDiv">
