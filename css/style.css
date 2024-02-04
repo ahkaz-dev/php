@@ -28,3 +28,17 @@ b {
     width: auto;
     height: 250px
 }
+.LtoSecondPart {
+    display: flex;
+    justify-content: right;
+    margin-top: 0px;
+}
+.LtoSecondPart a {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1bbcb9;
+    text-decoration: none;
+}
+.LtoSecondPart a:hover {
+    color: #30d17b;
+}

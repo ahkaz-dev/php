@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Пр 11-12</title>
+    <title>Пр 11-12(часть 1)</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 <div id="phpDiv">
     <div class="center">
+        <p class="LtoSecondPart">
+            <a href="/11-12/index_first.php">Вторая часть</a>
+        </p>
     <?php
         /* Работа с регистром символов */
         echo "<b>Работа с регистром символов</b><br>"; 
@@ -44,7 +47,7 @@
         $str = "LONDON";
         echo ucfirst(strtolower($str));
 
-        echo "<br>";
+        echo "<br><br>";
 
         /* Работа с substr */
         echo "<b>Работа с substr</b><br>";
@@ -95,7 +98,7 @@
             echo $str;
         }
 
-        echo "<br>";
+        echo "<br><br>";
 
         /* Работа с str_replace */
         echo "<b>Работа с str_replace</b><br>";
@@ -127,9 +130,6 @@
         echo $str;
 
         echo "<br>";
-
-        /* Работа с strtr */
-        echo "<b>Работа с strtr</b><br>";
         
         $str = "abcd";
         if (stristr($str,'a')) {
@@ -145,11 +145,87 @@
         }
         echo $str;
 
-        echo '<br>';
+        echo "<br><br>";
 
         /* Работа с substr_replace */
-        echo "<b>Работа с substr_replace</b><br>";        
-    ?>
+        echo "<b>Работа с substr_replace</b><br>";   
+        
+        $str = "Hello World!";
+        echo substr_replace($str,"!!!",0,3);
+
+        echo "<br><br>";
+
+        /* Работа с strpos, strrpos */
+        echo "<b>Работа с strpos, strrpos</b><br>";   
+
+        $str = "abc abc abc";
+        echo strpos($str,"b");
+
+        echo "<br>";
+        
+        echo strrpos($str,"b");
+
+        echo "<br>";
+
+        echo strpos($str,"b", 3);
+
+        echo "<br>";
+
+        $str = "aaa aaa aaa aaa aaa";
+        echo strpos($str," ", 4);
+
+        echo "<br>";
+
+        $str = "Hello..World!";
+        echo strpos($str,"..")? "Есть две точки подряд": "Нет две точки подряд";
+
+        echo "<br>";
+        
+        echo strpos($strTwoTest,"https://") ? "Нет" : "Да";
+
+        echo "<br><br>";
+
+        /* Работа с explode, implode */
+        echo "<b>Работа с explode, implode</b><br>";
+        
+        $str = "html css php";
+        $words = explode(" ", $str);
+        echo print_r($words);
+
+        echo "<br>";
+
+        $wordline = implode(" ", $words);
+        echo $wordline;
+
+        echo "<br>";
+
+        $date = "2013-12-31";
+        $dateArr = explode("-", $date);
+        $dateArr = array_reverse($dateArr);
+        $date = implode(".", $dateArr);
+        echo $date;
+
+        echo "<br><br>";
+
+        /* Работа с str_split */
+        echo "<b>Работа с str_split</b><br>";
+
+        $str = "1234567890";
+        echo print_r(str_split($str,2));
+
+        echo "<br>";
+
+        $str = "1234567890";
+        echo print_r(str_split($str,1));
+
+        echo "<br>";
+
+        $str = "1234567890";
+        $strArr = str_split($str,2);
+        $str = implode("-",$strArr);
+        echo $str;
+        
+        ?>
     </div>
 </div>    
 </body>
