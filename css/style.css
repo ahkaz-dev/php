@@ -42,3 +42,27 @@ b {
 .LtoSecondPart a:hover {
     color: #30d17b;
 }
+.smallText {
+    font-size: 15px;
+}
+.firstTableClass{
+    margin: 10px 0px 0px 0px;
+    border-collapse: collapse;
+    border: 2px solid rgb(71, 141, 112);
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+.firstTableClass thead,tfoot {
+    background-color: rgb(228, 245, 237);
+}
+.firstTableClass th,td {
+    border: 1px solid rgb(160 160 160);
+    padding: 8px 10px;
+}
+.firstTableClass tfoot th{
+    text-align: right;
+    color: #32734f;
+}
+.firstTableClass tfoot td{
+    font-weight: none;
+}
