@@ -149,6 +149,44 @@
 
             echo '<br>';  
 
+            /* Работа с array_intersect, array_diff */
+            echo "<b>Работа с array_intersect, array_diff</b><br>";
+            
+            $arr = [1, 2, 3, 4, 5];
+            $arrSec = [3, 4, 5, 6, 7];
+            $resultArr = array_intersect($arr, $arrSec);
+            print_r($resultArr);
+
+            echo "<br>";
+
+            $resultArrSec = array_diff($arr, $arrSec);
+            print_r($resultArrSec); 
+
+            echo "<br>";
+
+            /* Задачи */
+            echo "<b>Задачи</b><br>";
+            
+            $str = "1234567890";        
+            $strArr = str_split($str,1);
+            $result = array_sum($strArr);         
+            print_r($result);
+
+            echo "<br>";
+
+            // ['a'=>1, 'b'=2... 'z'=>26]
+            $arr = range('a','z');
+            array_unshift($arr,""); // добавляем в начало элемент пустой строки
+            unset($arr[0]);         // удаляем новый элемент
+            $arr = array_flip($arr);
+            print_r($arr);
+
+            echo "<br>";
+
+            $arr = [1,2,3];
+            $arrSec = [4,5,6];
+            $arrThr = [7,8,9];
+            echo var_dump($resultArr);
     ?>
     </div>
 </div>        
