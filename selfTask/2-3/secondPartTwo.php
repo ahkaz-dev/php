@@ -183,10 +183,16 @@
 
             echo "<br>";
 
-            $arr = [1,2,3];
-            $arrSec = [4,5,6];
-            $arrThr = [7,8,9];
-            echo var_dump($resultArr);
+            $arr = range(1, 9);
+            $resultArr = array_chunk($arr, 3);
+            print_r($resultArr);
+
+            echo "<br>";
+
+            $arr = [ 1, 2, 4, 5, 5];
+            sort($arr);
+            $value = $arr[1];
+            echo $value;
     ?>
     </div>
 </div>        
