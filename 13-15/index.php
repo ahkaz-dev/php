@@ -148,10 +148,39 @@
                 echo "</tr>";                               
             echo "</tfoot>";
         echo "</table>";
-
-        // Остановился на словах:
-        // "Подготовить файл, обеспечивающий проверку правильности ввода пароля"
     ?>
+    </div>
+</div>
+<div id="phpDiv">
+    <div class="center">
+        <?php
+        /* Задание № 2 */
+        echo "<b>Задание № 2</b><br>";
+        
+        /* Объявление переменных для паролей
+           Где $password_main - пароль
+        */        
+        $password_main  = "parol_!2345";
+        
+        /* Функция checkByRequiredPass
+           позволяет найти схожесть паролей
+           Если передавать значения напрямую, то результат будет аналогичным
+        */
+        function checkByRequiredPass($password_main){
+            $result_message = "";        
+            $password_required = "parol_!2345";      
+            if ($password_main == $password_required) {
+                return $result_message = "Ваш пароль верный";
+            } else {
+                return $result_message = "Найденны отличия в паролях!";
+            }
+        }
+        echo "Ваш пароль - " . $password_main . "<br>";
+        echo checkByRequiredPass($password_main);       
+        
+        // Остановился на словах:
+        // Задание № 4. Изучить материалы, относящиеся к организации циклов в PHP.        
+        ?>
     </div>
 </div>
 </body>
