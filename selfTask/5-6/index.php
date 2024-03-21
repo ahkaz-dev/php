@@ -86,8 +86,17 @@
 
         <?php 
             /* Атрибуты value и placeholder */
-            echo "<b><br>Атрибуты value и placeholder</b><br><br>"        
+            echo "<b><br>Атрибуты value и placeholder</b><br><br>";
+            $nameShow;
+            if (!empty($_REQUEST['nameShow'])) {
+                $nameShow = $_REQUEST['nameShow'];
+            }        
         ?>
+        <Br>
+        <form action="" method="GET">  
+            Имя <input type="text" name="nameShow" placeholder="nameShow">
+            <input type="submit"> 
+        </form>        
     </div>
 </div>
 </body>
