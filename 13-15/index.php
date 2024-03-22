@@ -178,10 +178,144 @@
         echo "Ваш пароль - " . $password_main . "<br>";
         echo checkByRequiredPass($password_main);       
         
-        // Остановился на словах:
-        // Задание № 4. Изучить материалы, относящиеся к организации циклов в PHP.        
-        ?>
+?>
     </div>
 </div>
+<div id="phpDiv">
+    <div class="center">
+        <?php
+        /* Задание № 3 */
+        echo "<b>Задание № 3</b>";
+
+        //ГОД => ЦЕНА => ИНФЛЯЦИЯ
+        $i = 0;
+        $main_price = 100;
+        $yearArr = array();
+        $priceArr = array();
+        $inflac = array();
+        // цикл while для решения
+        while($main_price < 150) {
+            if(!$i) {
+                $main_price += $main_price * 0.1;
+                //echo "<u>В конце года:  </u>" . $main_price . 'руб. <br/>';
+            } else {
+                $main_price += $main_price * 0.035;
+                //echo "$i год/лет =>" . $main_price . 'руб. <br/>';
+            }
+            $i++;
+            array_push($yearArr, $i);
+            array_push($priceArr, $main_price);
+            array_push($inflac, 0.035);
+        }
+        array_unshift($inflac, 0.1);
+        array_pop($inflac);
+        echo "<br>";
+        //echo var_dump($inflac);
+
+
+        $main_price = 100;
+        // цикл for, но такой же реализацией 
+        for($i = 0; $main_price < 150; $i++) {
+            if(!$i) {
+                $main_price += $main_price * 0.1;
+                //echo "В конце года:  ".$main_price.'руб. <br/>';
+            } else {
+                $main_price += $main_price * 0.035;
+                //echo "Через $i года(-а, лет):  ".$main_price.'руб. <br/>';
+            }
+        }        
+        ?>
+
+<span style="font-size: 15px;">цилом while:</span><br>
+<div style="display: flex;">
+    <table>
+        <tr>
+            <th>Год</th>
+        </tr>
+        <tr>
+            <?php
+            foreach ( $yearArr as $elem ) {
+                echo "<td>" . $elem . "</td></tr>";
+            }        
+            ?>  
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>Цена</th>
+        </tr>
+        <tr>
+            <?php
+            foreach ( $priceArr as $elem ) {
+                echo "<tr><td>" . $elem . "</tr></tr>";
+            }
+            ?>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>Инфляция</th>
+        </tr>
+        <tr>
+            <?php         
+            foreach ( $inflac as $elem ) {
+                echo "<tr><td>" . $elem . "</tr></tr>";       
+            }
+            ?>
+        </tr>
+    </table>       
+</div>
+
+<span style="font-size: 15px;">цилом for:</span><br>
+<div style="display: flex;">
+    <table>
+        <tr>
+            <th>Год</th>
+        </tr>
+        <tr>
+            <?php
+            $ite = 0;
+            foreach ( $yearArr as $elem ) {
+                echo "<td>" . $elem . "</td></tr>";
+                $ite++;
+                if ($ite >= 5) break;
+            }        
+            ?>  
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>Цена</th>
+        </tr>
+        <tr>
+            <?php
+            $ite = 0;            
+            foreach ( $priceArr as $elem ) {
+                echo "<tr><td>" . $elem . "</tr></tr>";
+                $ite++;
+                if ($ite >= 5) break;                
+            }
+            ?>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>Инфляция</th>
+        </tr>
+        <tr>
+            <?php
+            $ite = 0;            
+            foreach ( $inflac as $elem ) {
+                echo "<tr><td>" . $elem . "</tr></tr>";
+                $ite++;
+                if ($ite >= 5) break;                
+            }
+            ?>
+        </tr>
+    </table>    
+</div>
+
+</div>
+</div>  
 </body>
 </html>
