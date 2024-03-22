@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,9 +9,12 @@
 <body>
 <div id="phpDiv">
     <div class="center">
+    <p class="LtoSecondPart">
+            <a href="../selfTask/third.php">Обновить страницу</a>
+    </p>
         <?php
             /* Формы */
-            echo "<b>Формы</b><br><br>";
+            echo "<b>Формы</b><br>";
 
             $justName;
             if (!empty($_REQUEST['justName'])) {
@@ -21,7 +24,7 @@
         ?>
 
         <form action="" method="GET">  
-            Имя <input type="text" name="justName">
+            Имя <input type="text" name="justName" placeholder="Выводит ваше имя">
             <input type="submit"> 
         </form>
         <br>
@@ -47,23 +50,43 @@
                 // Получаем данные из таблицы по запросу age
                 // удаляем все html теги
                 $age = strip_tags($_REQUEST['age']);
-                echo "Привет, " . $name . ", " . $age . " лет.";
+                echo "Привет, " . $name . ", тебе " . $age . " лет.";
                 echo "<br>Твое сообщение: " . $message;  
             }            
         ?>
+    
         <form action="" method="GET">  
-            Имя <input type="text" name="name">
-            Возраст <input type="text" name="age">
+            Имя <input type="text" name="name" placeholder="Выводит имя">
+            Возраст <input type="text" name="age" placeholder="Выводит возраст">
             <p></p> 
-            Сообщение <textarea name="userMessage" rows="1" cols="22"></textarea>
+            Сообщение <textarea name="userMessage" rows="1" cols="22" maxlength="10" placeholder="Выводит сообщение"></textarea>
             <input type="submit"> 
         </form>
+        <br>
+
+        <?php
+            if (empty($_REQUEST['older'])) {
+        ?> 
+            <form action="" method="GET">
+                Введите возраст <input type="text" name="older" placeholder="Скрывает форму">
+                <input type="submit">
+            </form>
+        <?php
+            }
+        ?>
+        <?php
+            if (isset($_REQUEST['older'])) {
+            $city = strip_tags($_REQUEST['older']);
+            echo 'Возраст: '. $city;
+            }
+        ?>
 
         <?php
         $login = "myLogin_123";
         $userLogin;
         $pass = "1234qwerty";
         $userPass;
+        
         if (!empty($_REQUEST['login']) && !empty($_REQUEST['password'])) {
             $userLogin = $_REQUEST['login'];
             $userLogin = trim($userLogin);
@@ -79,24 +102,45 @@
         ?>
         <Br>
         <form action="" method="GET">  
-            Логин <input type="text" name="login">
-            Пароль <input type="password" name="password" >
+            Логин <input type="text" name="login" placeholder="Проверка пароля">
+            Пароль <input type="password" name="password" placeholder="Проверка логина">
             <input type="submit"> 
         </form>
 
         <?php 
             /* Атрибуты value и placeholder */
-            echo "<b><br>Атрибуты value и placeholder</b><br><br>";
-            $nameShow;
-            if (!empty($_REQUEST['nameShow'])) {
-                $nameShow = $_REQUEST['nameShow'];
-            }        
+            echo "<b><br>Атрибуты value и placeholder</b>";
+     
         ?>
         <Br>
-        <form action="" method="GET">  
-            Имя <input type="text" name="nameShow" placeholder="nameShow">
+        <form action="" method="get">  
+            Имя <input type="text" name="nameShow" placeholder="Сохранение данных" 
+            value="<?php 
+            if (isset($_REQUEST['nameShow'])) {
+                echo $_REQUEST['nameShow'];
+            }                   
+            ?>">
             <input type="submit"> 
-        </form>        
+        </form>
+        <br>
+        
+        <form action="" method="GET">  
+            Имя <input type="text" name="nickName" placeholder="Сохранение данных" 
+            value="<?php 
+            if (isset($_GET['nickName'])) {
+                echo $_GET['nickName'];
+            }                   
+            ?>">
+            Сообщение 
+            <textarea name="nickMessage" rows="1" maxlength="10" cols="22" placeholder="Сохранение данных" ><?php if (isset($_GET['nickMessage'])) {$mess = $_GET['nickMessage'];echo trim($mess);}?></textarea>
+            <!-- <?php 
+                if (isset($_GET['nickMessage'])) {
+                    $mess = $_GET['nickMessage'];
+                    echo trim($mess);}
+            ?> -->
+            <input type="submit"> 
+        </form>
+        <br>
     </div>
 </div>
 </body>
