@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -178,7 +178,9 @@
         echo "Ваш пароль - " . $password_main . "<br>";
         echo checkByRequiredPass($password_main);       
         
-?>
+        // Остановился на словах:
+        // Задание № 4. Изучить материалы, относящиеся к организации циклов в PHP.        
+        ?>
     </div>
 </div>
 <div id="phpDiv">
@@ -223,7 +225,25 @@
                 $main_price += $main_price * 0.035;
                 //echo "Через $i года(-а, лет):  ".$main_price.'руб. <br/>';
             }
-        }        
+        }
+
+        $other_price = 170;
+        $other_yearArr = array();
+        $other_priceArr = array();
+        $other_inflac = array();
+        $i = 1;
+        while($other_price > 0) {
+            if (!$i) {
+                $other_price += $other_price / 0.035;
+            } else {
+                $other_price += $other_price / 0.035;
+            }
+        
+            array_push($other_yearArr, $i);
+            array_push($other_priceArr, $other_price);
+            array_push($other_inflac, 0.035);
+            $i++;
+        } 
         ?>
 
 <span style="font-size: 15px;">цилом while:</span><br>
@@ -312,10 +332,50 @@
             }
             ?>
         </tr>
-    </table>    
+    </table>   
+</div>
+
+<span style="font-size: 15px;">снижение</span><br>
+<div style="display: flex;">
+    <table>
+        <tr>
+            <th>Год</th>
+        </tr>
+        <tr>
+            <?php
+            foreach ( $other_yearArr as $elem ) {
+                echo "<td>" . $elem . "</td></tr>";
+            }        
+            ?>  
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>Цена</th>
+        </tr>
+        <tr>
+            <?php
+            foreach ( $other_priceArr as $elem ) {
+                echo "<tr><td>" . $elem . "</tr></tr>";
+            }
+            ?>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>Инфляция</th>
+        </tr>
+        <tr>
+            <?php         
+            foreach ( $other_inflac as $elem ) {
+                echo "<tr><td>" . $elem . "</tr></tr>";       
+            }
+            ?>
+        </tr>
+    </table>       
 </div>
 
 </div>
-</div>  
+</div> 
 </body>
 </html>
