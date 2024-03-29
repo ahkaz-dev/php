@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<div id="phpDiv">
+<div id="phpDiv" style="margin-top: 20px;">
     <div class="center">
     <?php
         /* Задание № 1 */
@@ -151,7 +151,7 @@
     ?>
     </div>
 </div>
-<div id="phpDiv">
+<div id="phpDiv" style="margin-top: 20px;">
     <div class="center">
         <?php
         /* Задание № 2 */
@@ -183,7 +183,7 @@
         ?>
     </div>
 </div>
-<div id="phpDiv">
+<div id="phpDiv" style="margin-top: 20px;">
     <div class="center">
         <?php
         /* Задание № 3 */
@@ -206,10 +206,10 @@
             }
             $i++;
             array_push($yearArr, $i);
-            array_push($priceArr, $main_price);
-            array_push($inflac, 0.035);
+            array_push($priceArr, round($main_price, 2));
+            array_push($inflac, "3.5%");
         }
-        array_unshift($inflac, 0.1);
+        array_unshift($inflac, "10%");
         array_pop($inflac);
         echo "<br>";
         //echo var_dump($inflac);
@@ -227,26 +227,21 @@
             }
         }
 
+        // Снижение цены на 3.5%, которая достигла 170р
         $other_price = 170;
         $other_yearArr = array();
         $other_priceArr = array();
         $other_inflac = array();
-        $i = 1;
-        while($other_price > 0) {
-            if (!$i) {
-                $other_price += $other_price / 0.035;
-            } else {
-                $other_price += $other_price / 0.035;
-            }
-        
+        for ($i = 1; $i <= 10; $i++) {
+            $other_price -= $other_price * 0.035;
             array_push($other_yearArr, $i);
-            array_push($other_priceArr, $other_price);
-            array_push($other_inflac, 0.035);
-            $i++;
-        } 
+            array_push($other_priceArr, round($other_price, 2)); // round округляет число на заданное n
+            array_push($other_inflac, "3.5%");
+        }
+
         ?>
 
-<span style="font-size: 15px;">цилом while:</span><br>
+<span style="font-size: 20px; text-decoration: underline;">цилом while:</span><br>
 <div style="display: flex;">
     <table>
         <tr>
@@ -286,7 +281,7 @@
     </table>       
 </div>
 
-<span style="font-size: 15px;">цилом for:</span><br>
+<span style="font-size: 20px; text-decoration: underline;">цилом for:</span><br>
 <div style="display: flex;">
     <table>
         <tr>
@@ -335,7 +330,7 @@
     </table>   
 </div>
 
-<span style="font-size: 15px;">снижение</span><br>
+<span style="font-size: 20px; text-decoration: underline;">снижение</span><br>
 <div style="display: flex;">
     <table>
         <tr>
@@ -374,8 +369,105 @@
         </tr>
     </table>       
 </div>
-
 </div>
 </div> 
+<div id="phpDiv" style="margin-top: 20px;"  >
+    <div class="center">
+        <?php
+        /* Задание № 5 */
+        echo "<b>Задание № 5</b><br>";
+        // создаем индексированный список с 5ю элементами
+        echo "<u>Созданный массив -></u> ";
+        $productNameArr =  array("Монитор", "Мышь", "Принтер", "Оперативная память", "Сканер");
+        print_r($productNameArr);
+        echo "<br>";
+        
+        echo "<u>В массив добавлен новый элемент -></u> ";
+        $productNameArr[] = "Клавиатура";
+        print_r($productNameArr);
+
+        echo "<br><u>Число элементов массива =</u> " . count($productNameArr) . "<br>";
+        
+        echo "<u>Название элементов через foreach -></u> ";
+        foreach($productNameArr as $ite) {
+            echo $ite . " ";
+        }
+
+        echo "<br><u>Сортировка массива по алфавиту -></u> ";
+        sort($productNameArr);
+        foreach($productNameArr as $ite) {
+            echo $ite . " ";
+        }
+        ?>
+    </div>
+</div>
+<div id="phpDiv" style="margin-top: 20px;"  >
+    <div class="center">
+        <?php
+        /* Задание № 6 */
+        echo "<b>Задание № 6</b><br>";
+
+        // с помощью array()
+        $keyArray_products = array("Монитор" => 500, "Оперативная память" => 350, "Клавиатура" => 94);
+        // операторе присваивания
+        $keyArray_products["Принтер "] = 692;
+        $keyArray_products["Сканер"] = 38;
+        print_r($keyArray_products);
+
+        echo "<br><u>Количество товаров -></u> " . count($keyArray_products);
+        echo "<br><u>Суммарная стоимость -></u> " . array_sum($keyArray_products);
+
+        echo "<br><u>Сортировка в порядке убывания -></u> ";
+        arsort($keyArray_products);
+        foreach($keyArray_products as $ite) {
+            echo $ite . " ";
+        }
+
+        echo "<br><u>Сортировка в порядке возрастания -></u> ";
+        asort($keyArray_products);
+        foreach($keyArray_products as $ite) {
+            echo $ite . " ";
+        }
+
+        echo "<br><u>Сортировка массива(ключей) по алфавиту -></u> ";
+        ksort($keyArray_products);
+        foreach($keyArray_products as $ite => $value) {
+            echo $ite . " ";
+        }
+        ?>
+    </div>
+</div>  
+<div id="phpDiv" style="margin-top: 20px;"  >
+    <div class="center">
+        <?php
+        /* Задание № 7 */
+        echo "<b>Задание № 7</b><br>";
+        ?>
+    </div>
+</div>
+<div id="phpDiv" style="margin-top: 20px;"  >
+    <div class="center">
+        <?php
+        /* Задание № 8 */
+        echo "<b>Задание № 8</b><br>";
+        ?>
+    <table>
+        <tr>
+            Основные html цвета
+        </tr>
+        <tr>
+            <?php
+                echo "<td>" . hexdec(00) . "</td>";
+                echo "<td>" . $elem . "</td>";
+                echo "<td>" . $elem . "</td>";
+                echo "<td>" . $elem . "</td>";
+                echo "<td>" . $elem . "</td>";
+                echo "<td>" . $elem . "</td>";
+                echo "<td>" . $elem . "</td>";
+            ?>  
+        </tr>
+    </table>
+    </div>
+</div>          
 </body>
 </html>
