@@ -177,9 +177,7 @@
         }
         echo "Ваш пароль - " . $password_main . "<br>";
         echo checkByRequiredPass($password_main);       
-        
-        // Остановился на словах:
-        // Задание № 4. Изучить материалы, относящиеся к организации циклов в PHP.        
+         
         ?>
     </div>
 </div>
@@ -441,7 +439,7 @@
     <div class="center">
         <?php
         /* Задание № 7 */
-        echo "<b>Задание № 7</b><br>";
+        echo "<b>Задание № 7</b><br>";         
         ?>
     </div>
 </div>
@@ -450,23 +448,66 @@
         <?php
         /* Задание № 8 */
         echo "<b>Задание № 8</b><br>";
+        
+        // Определение массива возможных шестнадцатеричных значений для компонентов RGB.
+        $hexValues = ['00', 'FF'];
+
+        // Инициализируем пустой массив для хранения названий цветов и соответствующих им шестнадцатеричных кодов.
+        $colorNames = [];
+
+        // Генерируем названия цветов и шестнадцатеричные коды, используя вложенные циклы.
+        foreach ($hexValues as $red) {
+            foreach ($hexValues as $green) {
+                foreach ($hexValues as $blue) {
+                    // Создайте шестнадцатеричный код путем объединения компонентов RGB.
+                    $hexCode = $red . $green . $blue;
+
+                    // Проверьте, не является ли только один из компонентов RGB ненулевым.
+                    $isRed = ($red === 'FF' && $green === '00' && $blue === '00');
+                    $isGreen = ($red === '00' && $green === 'FF' && $blue === '00');
+                    $isBlue = ($red === '00' && $green === '00' && $blue === 'FF');
+
+                    if ($isRed || $isGreen || $isBlue) {
+                        // Присвойте названия цветам для красного, зеленого и синего.
+                        $colorName = $isRed ? 'Red' : ($isGreen ? 'Green' : 'Blue');
+                        $colorNames[$colorName] = $hexCode;
+                    }
+                }
+            }
+        }
+
+        // Start the HTML output.
+        echo '<!DOCTYPE html>';
+        echo '<html lang="en">';
+        echo '<head>';
+        echo '    <meta charset="UTF-8">';
+        echo '    <title>HTML Colors</title>';
+        echo '</head>';
+        echo '<body>';
+        echo '    <table border="1">';
+        echo '        <thead>';
+        echo '            <tr>';
+        echo '                <th>Название цвета</th>';
+        echo '                <th>Hex Code</th>';
+        echo '                <th>Цвет</th>';
+        echo '            </tr>';
+        echo '        </thead>';
+        echo '        <tbody>';
+
+        // Перебирайте названия цветов и шестнадцатеричные коды, чтобы сгенерировать строки таблицы.
+        foreach ($colorNames as $colorName => $hexCode) {
+            echo '            <tr>';
+            echo '                <td>' . $colorName . '</td>';
+            echo '                <td>' . $hexCode . '</td>';
+            echo '                <td style="background-color: #' . $hexCode . '; width: 100px; height: 50px;"></td>';
+            echo '            </tr>';
+        }
+
+        echo '        </tbody>';
+        echo '    </table>';
+        echo '</body>';
+        echo '</html>';
         ?>
-    <table>
-        <tr>
-            Основные html цвета
-        </tr>
-        <tr>
-            <?php
-                echo "<td>" . hexdec(00) . "</td>";
-                echo "<td>" . $elem . "</td>";
-                echo "<td>" . $elem . "</td>";
-                echo "<td>" . $elem . "</td>";
-                echo "<td>" . $elem . "</td>";
-                echo "<td>" . $elem . "</td>";
-                echo "<td>" . $elem . "</td>";
-            ?>  
-        </tr>
-    </table>
     </div>
 </div>          
 </body>
