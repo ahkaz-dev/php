@@ -17,28 +17,56 @@
             $surname;
             $lastname;
             $allFIO = "";
+            $address;
+            $email;
             if (!empty($_REQUEST['name'])) {
                 $name = $_REQUEST['name'];
-                #echo "Ваше" . $name . "!";
                 $allFIO .= $name;
             }
             if (!empty($_REQUEST['surname'])) {
                 $surname = $_REQUEST['surname'];
-                #echo "Привет, " . $surname . "!";
                 $allFIO .= " " . $surname;
             }
             if (!empty($_REQUEST['lastname'])) {
                 $lastname = $_REQUEST['lastname'];
-                #echo "Привет, " . $lastname . "!";
                 $allFIO .= " " . $lastname;
             }
-            echo "ФИО:  " . $allFIO;
+            if (!empty($_REQUEST['address'])) {
+                $address = $_REQUEST['address'];
+            }
+            if (!empty($_REQUEST['email'])) {
+                $email = $_REQUEST['email'];
+            }
         ?>
+        <table style="display: flex;
+    flex-direction: column;
+    align-items: center;">
+            <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Адрес</th>
+                <th>Почта</th>
+            </tr>
+            </thead>
+            <tbody>
+                <?php
+            echo '<tr>';
+            echo '<td>' . $allFIO . '</td>';
+            echo '<td>' . $address . '</td>';
+            echo '<td>' . $email . '</td>';
+            echo '</tr>';                
+                ?>
+            </tbody>
+        </table>
+        <br>
 
         <form action="" method="GET">  
             Имя <input type="text" name="name" placeholder="Введите имя">
             Фамилия <input type="text" name="surname" placeholder="Введите фамиию">
             Отчество <input type="text" name="lastname" placeholder="Введите отчество">
+            <br>
+            Адрес <input type="text" name="address" placeholder="Введите адрес">
+            Почта <input type="email" name="email" placeholder="Введите емайл">
             <br>
             <input type="submit"> 
         </form>

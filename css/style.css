@@ -6,6 +6,10 @@ body {
 b {
     color: #3bbf9f;
 }
+.other {
+    color: black;
+    font-weight: 600;
+}
 #phpDiv {
     margin-top: 5px;
     display: flex;
