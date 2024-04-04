@@ -279,7 +279,7 @@
     </table>       
 </div>
 
-<span style="font-size: 20px; text-decoration: underline;">цилом for:</span><br>
+
 <div style="display: flex;">
     <table>
         <tr>
@@ -439,8 +439,21 @@
     <div class="center">
         <?php
         /* Задание № 7 */
-        echo "<b>Задание № 7</b><br>";         
+        echo "<b>Задание № 7</b><br>";
+        
+        $user_name = "Захар";
+        $user_educ = "Студент";
+        $user_status = "Начинающий разработчик";
+        
+        echo "<p style=\"text-align: left; margin-bottom: 0px\">";
+        echo "Я - $user_name, $user_status.<br> 
+              В данный момент я $user_educ и работаю над решением задач, используя<br> язык программирования PHP. 
+              <br>Этот язык мне нравится, потому что он прост в изучении и позволяет создавать<br> функциональные и интересные веб-проекты. 
+              <br>Моя цель - стать лучшим в своей профессии и помочь другим программистам.";
+        echo "</p>";
+        echo "<p style=\"font-size: 20px; text-decoration: underline; text-align: left; margin-bottom: 0px; margin-top: 0px;\">данный текст был написан с помозью функции echo</p>";
         ?>
+        
     </div>
 </div>
 <div id="phpDiv" style="margin-top: 20px;"  >
@@ -449,26 +462,26 @@
         /* Задание № 8 */
         echo "<b>Задание № 8</b><br>";
         
-        // Определение массива возможных шестнадцатеричных значений для компонентов RGB.
+        // Массив 16-ричных значений  
         $hexValues = ['00', 'FF'];
 
-        // Инициализируем пустой массив для хранения названий цветов и соответствующих им шестнадцатеричных кодов.
+        // Массив для названий
         $colorNames = [];
 
-        // Генерируем названия цветов и шестнадцатеричные коды, используя вложенные циклы.
         foreach ($hexValues as $red) {
             foreach ($hexValues as $green) {
                 foreach ($hexValues as $blue) {
-                    // Создайте шестнадцатеричный код путем объединения компонентов RGB.
+                    // Создаем шестнадцатеричный код путем объединения компонентов RGB
+                    // красного - зеленого - синего
                     $hexCode = $red . $green . $blue;
 
-                    // Проверьте, не является ли только один из компонентов RGB ненулевым.
+                    // Является ли компонент RGB не нулевым 
                     $isRed = ($red === 'FF' && $green === '00' && $blue === '00');
                     $isGreen = ($red === '00' && $green === 'FF' && $blue === '00');
                     $isBlue = ($red === '00' && $green === '00' && $blue === 'FF');
 
                     if ($isRed || $isGreen || $isBlue) {
-                        // Присвойте названия цветам для красного, зеленого и синего.
+                        // С помощью тернарного операотора присваиваем название цвета
                         $colorName = $isRed ? 'Red' : ($isGreen ? 'Green' : 'Blue');
                         $colorNames[$colorName] = $hexCode;
                     }
@@ -476,39 +489,54 @@
             }
         }
 
-        // Start the HTML output.
-        echo '<!DOCTYPE html>';
-        echo '<html lang="en">';
-        echo '<head>';
-        echo '    <meta charset="UTF-8">';
-        echo '    <title>HTML Colors</title>';
-        echo '</head>';
-        echo '<body>';
-        echo '    <table border="1">';
-        echo '        <thead>';
-        echo '            <tr>';
-        echo '                <th>Название цвета</th>';
-        echo '                <th>Hex Code</th>';
-        echo '                <th>Цвет</th>';
-        echo '            </tr>';
-        echo '        </thead>';
-        echo '        <tbody>';
+        echo '<table border="1">';
+        echo '<thead>';
+        echo '<tr>';
+        echo '<th>Название цвета</th>';
+        echo '<th>Hex Code</th>';
+        echo '<th>Цвет</th>';
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody>';
 
-        // Перебирайте названия цветов и шестнадцатеричные коды, чтобы сгенерировать строки таблицы.
+        // Построение строки с помощью цикла
         foreach ($colorNames as $colorName => $hexCode) {
-            echo '            <tr>';
-            echo '                <td>' . $colorName . '</td>';
-            echo '                <td>' . $hexCode . '</td>';
-            echo '                <td style="background-color: #' . $hexCode . '; width: 100px; height: 50px;"></td>';
-            echo '            </tr>';
+            echo '<tr>';
+            echo '<td>' . $colorName . '</td>';
+            echo '<td>' . $hexCode . '</td>';
+            echo '<td style="background-color: #' . $hexCode . '; width: 100px; height: 50px;"></td>';
+            echo '</tr>';
         }
 
-        echo '        </tbody>';
-        echo '    </table>';
+        echo '</tbody>';
+        echo '</table>';
         echo '</body>';
         echo '</html>';
         ?>
     </div>
-</div>          
+</div>  
+<div id="phpDiv" style="margin-top: 20px;"  >
+    <div class="center">
+        <?php
+        /* Задание № 9 */
+        echo "<b>Задание № 9</b><br>";
+
+        // Заданное число n
+        $n = 50;
+        echo "<u>Дано n =</u> $n <br>";
+        $randNummArr = [];
+        for($i = 0; $i<=5; $i++) {
+            $randNummArr[$i] = rand(1,15);
+        }
+        echo "<u>Дан массив -></u> ";
+        print_r($randNummArr);
+        if (array_sum($randNummArr) <= $n) {
+            echo "<br><u>Сумма чисел меньше или равное n =</u> " . array_sum($randNummArr);
+        } else {
+            echo "<br><u>Сумма чисел больше заданного n =</u> " . array_sum($randNummArr);
+        }
+        ?>
+    </div>
+</div>        
 </body>
 </html>
