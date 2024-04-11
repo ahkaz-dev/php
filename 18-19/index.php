@@ -117,11 +117,11 @@
     ?>
     <form method="post" name="send_Email" action="congratulations.php">
 
-    Enter Name:	<input type="text" name="to">
+    Enter Name:	<input type="text" name="to" placeholder="Ваша почта">
 
-    Enter Email Address:	<input type="text" name="subject">
+    Enter Email Address:	<input type="text" name="subject" placeholder="На какую почту отправить">
 
-    Enter Message:	<textarea name="message"></textarea>
+    Enter Message:	<textarea name="message" placeholder="Ваше сообщение"></textarea>
 
     <input type="submit" value="Отправить">
     </form>
@@ -154,9 +154,9 @@
             }
     ?>
     <form method="get">
-        Первое число <input type="text" name="first_a" id="">
+        Первое число <input type="text" name="first_a" id="" placeholder="Ввод только чисел">
         <Br>
-        Второе число <input type="text" name="first_b" id="">
+        Второе число <input type="text" name="first_b" id="" placeholder="Ввод только чисел">
         <br><br>
         <input type="submit" value="+" name="submit_plus" style="width: 50px; height: 50px; padding: 16px 16px;">
         <input type="submit" value="-" name="submit_minus" style="width: 50px; height: 50px; padding: 16px 16px;">
@@ -181,11 +181,11 @@
             }
     ?>
     <form action="form.php" method="post">
-        Имя <input type="text" name="user_name">
+        Имя <input type="text" name="user_name" placeholder="Ваше имя">
         <Br>
-        Количество языков программирования, которые вы знаете <input type="text" name="user_knowledge">
+        Количество языков программирования, которые вы знаете <input type="text" name="user_knowledge" placeholder="ЯП через запятую"> 
         <br>
-        Дата рождения <input type="text" name="user_dateOfBirth">
+        Дата рождения <input type="text" name="user_dateOfBirth" placeholder="Пример: 20.12.2013">
         <br>
         <br>
         <input type="submit">    
@@ -197,44 +197,7 @@
     <?php
         /* Задание № 7 */
         echo "<b>Задание № 7</b>";
-        $i = 0;
-        if (isset($_GET['value_Q1'])) {
-            $i += 10;
-        }
-        echo "<br>" . $i;
     ?>
-    <form action="" method="get">
-    На каком языке сделана эта работа?
-    <br>
-        <input type="checkbox" name="value_Q1_1" id="">
-            <label for="value1">PHP</label>
-            <br>
-        <input type="checkbox" name="value_Q2_2" id="">
-            <label for="value1">Java</label>
-            <br>
-        <input type="checkbox" name="value_Q3_3" id="">
-            <label for="value1">Python</label>
-            <br>
-        <input type="checkbox" name="value_Q4_4" id="">
-            <label for="value1">Html</label>
-            <br>
-    Вопрос 2
-    <br>
-        <input type="checkbox" name="value5" id="">
-            <label for="value1">Ответ 1</label>
-            <br>
-        <input type="checkbox" name="value" id="">
-            <label for="value1">Ответ 2</label>
-            <br>
-        <input type="checkbox" name="value3" id="">
-            <label for="value1">Ответ 3</label>
-            <br>
-        <input type="checkbox" name="value4" id="">
-            <label for="value1">Ответ 4</label>
-            <br>            
-        <input type="submit">
-    </form>
-    </div>
 </div>
 </body>
 </html>
