@@ -197,6 +197,67 @@
     <?php
         /* Задание № 7 */
         echo "<b>Задание № 7</b>";
+        $final_answer1 = "Ответ";
+        $final_answer2 = "Ответ";
+        $final_answer3 = "Ответ";
+        $final_answer4 = "Ответ";
+
+        $enter_answer1 = "";
+        $enter_answer2 = "";
+        $enter_answer3 = "";
+        $enter_answer4 = "";
+
+        $questArr = array();
+
+        $result = 0;
+        if (isset($_GET['enter_answer'])) {
+            $enter_answer1 = $_GET['enter_answer'];
+            if ($enter_answer1 == $final_answer1 ) {
+                $result += 10;
+            } else {
+                $questArr[] = 1;
+            }
+        }
+        if (isset($_GET['enter_answer2'])) {
+            $enter_answer2 = $_GET['enter_answer2'];
+            if ($enter_answer2 == $final_answer2 ) {
+                $result += 10;
+            } else {
+                $questArr[] = 2;
+            }
+        }
+        if (isset($_GET['enter_answer3'])) {
+            $enter_answer3 = $_GET['enter_answer3'];
+            if ($enter_answer3 == $final_answer3 ) {
+                $result += 10;
+            } else {
+                $questArr[] = 3;
+            }
+        }
+        if (isset($_GET['enter_answer4'])) {
+            $enter_answer4 = $_GET['enter_answer4'];
+            if ($enter_answer4 == $final_answer4 ) {
+                $result += 10;
+            } else {
+                $questArr[] = 4;
+            }
+        }
+    ?>
+    <form action="" method="get">
+        Вопрос 1 <input type="text" name="enter_answer" placeholder="Введите ответ"><br>
+        Вопрос 2 <input type="text" name="enter_answer2" placeholder="Введите ответ"><br>
+        Вопрос 3 <input type="text" name="enter_answer3" placeholder="Введите ответ"><br>
+        Вопрос 4 <input type="text" name="enter_answer4" placeholder="Введите ответ">
+        <br>
+        <input type="submit">
+    </form>
+    <?php
+        echo "Результат теста: " . $result;
+        echo "<br>Вы ошиблись в ";
+        foreach($questArr as $i) {
+            echo $i . " ";
+        }
+        echo "вопросе!";
     ?>
 </div>
 </body>
