@@ -174,10 +174,16 @@
             $user_knowledge = "";
             $user_dateOfBirth = "";
             if (isset($_POST['user_name']) & isset($_POST['user_knowledge']) & isset($_POST['user_dateOfBirth']) ) {
-                $user_name = $_POST['user_name'];
-                $user_knowledge = $_POST['user_knowledge'];
-                $user_dateOfBirth = $_POST['user_dateOfBirth'];
-                header("Location: form.php");
+                if (!empty($_POST['user_name']) & !empty($_POST['user_knowledge']) & !empty($_POST['user_dateOfBirth'])) {
+                    $user_name = $_POST['user_name'];
+                    $user_knowledge = $_POST['user_knowledge'];
+                    $user_dateOfBirth = $_POST['user_dateOfBirth'];
+                    header("Location: form.php");
+                } else {
+                    $user_name = "";
+                    $user_knowledge = "";
+                    $user_dateOfBirth = "";
+                }
             }
     ?>
     <form action="form.php" method="post">
@@ -197,8 +203,8 @@
     <?php
         /* Задание № 7 */
         echo "<b>Задание № 7</b>";
-        $final_answer1 = "Ответ";
-        $final_answer2 = "Ответ";
+        $final_answer1 = "PHP";
+        $final_answer2 = "echo";
         $final_answer3 = "Ответ";
         $final_answer4 = "Ответ";
 
@@ -244,18 +250,45 @@
         }
     ?>
     <form action="" method="get">
-        Вопрос 1 <input type="text" name="enter_answer" placeholder="Введите ответ"><br>
-        Вопрос 2 <input type="text" name="enter_answer2" placeholder="Введите ответ"><br>
-        Вопрос 3 <input type="text" name="enter_answer3" placeholder="Введите ответ"><br>
-        Вопрос 4 <input type="text" name="enter_answer4" placeholder="Введите ответ">
-        <br>
+        <b class="other">1) На каком языке программирования написана эта работа?</b>
+        <ul style="display: flex; align-items:flex-start; flex-direction:column; margin-top: 0px;">
+            <li>PHP</li>
+            <li>Java</li>
+            <li>Python</li>
+            <li style="list-style-type:none; padding: 0px 0px 0px 50px;">Ваш ответ: <input type="text" name="enter_answer" placeholder="Введите ответ"></li>
+        </ul>
+
+        <b class="other">2) Какой метод позволяет вывести строку?</b>
+        <ul style="display: flex; align-items:flex-start; flex-direction:column; margin-top: 0px;"> 
+            <li>chr()</li>
+            <li>str_replace()</li>
+            <li>echo</li>
+            <li>array_pop()</li>
+            <li style="list-style-type:none; padding: 0px 0px 0px 50px;">Ваш ответ: <input type="text" name="enter_answer2" placeholder="Введите ответ"><br></li>
+        </ul>
+       
+        <b class="other">3) Какой то вопрос?</b>
+        <ul style="display: flex; align-items:flex-start; flex-direction:column; margin-top: 0px;"> 
+            <li>Выриант ответа</li>
+            <li>Выриант ответа</li>
+            <li>Выриант ответа</li>
+            <li style="list-style-type:none; padding: 0px 0px 0px 50px;">Ваш ответ: <input type="text" name="enter_answer3" placeholder="Введите ответ"><br></li>
+        </ul>
+
+        <b class="other">4) Какой то вопрос?</b>
+        <ul style="display: flex; align-items:flex-start; flex-direction:column; margin-top: 0px; margin-bottom: 0px"> 
+            <li>Выриант ответа</li>
+            <li>Выриант ответа</li>
+            <li>Выриант ответа</li>
+            <li style="list-style-type:none; padding: 0px 0px 0px 50px;">Ваш ответ: <input type="text" name="enter_answer4" placeholder="Введите ответ"></li>
+        </ul>
         <input type="submit">
     </form>
     <?php
-        echo "Результат теста: " . $result;
+        echo "Результат теста: <span style=\"color: green\">" . $result . "</span>";
         echo "<br>Вы ошиблись в ";
         foreach($questArr as $i) {
-            echo $i . " ";
+            echo  "<span style=\"color: red\"> " . $i . "</span> ";
         }
         echo "вопросе!";
     ?>
