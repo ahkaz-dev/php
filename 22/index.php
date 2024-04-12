@@ -78,18 +78,14 @@
         echo "<b>Задание № 3</b><br>";       
             // Дан массив с числами. Проверьте, есть ли в нем два одинаковых числа подряд. 
             // Если есть - выведите 'да', а если нет - выведите 'не 
-        $numArray = range(0, 15);
-        shuffle($numArray);
-        $numArray = array_slice($numArray ,0, 5);
-        $flag = false;
+            $arr = [4,12,73,8,1,1,36,7,6,22,22,3];
 
-        echo "Дан массив: [ ";    
-        foreach ($numArray as $key => $value) {
-            echo $value . ", ";
-        if ($key == count($numArray) - 1) {
-            echo $value . " ]";
-        }
-    }    
+            for ($i = 0; $i < count($arr); $i++) {
+                if ($i && $arr[$i] == $arr[($i-1)]) {
+                    echo 'есть идущие подряд: '.$arr[$i].' - '.$arr[$i].'<br>';
+                }
+            }
+          
     ?>
     </div>
 </div>
