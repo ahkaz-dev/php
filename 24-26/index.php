@@ -16,38 +16,43 @@
         // Задание 1
 
         $color = "white";
-        $vline;
-        echo "<b>Задание № 1</b><br>";    
-
-        if (isset($_POST['vote'])){
-
-        $file = $_POST['vote'].".txt";
-
-        $f = fopen($file,"r");
-
-        $votes = fread($f,100);
-
-        $votes++;
-
-
-        $f = fopen($file,"w");
-        fwrite($f,$votes);
-        fclose($f);
-
-        //$color = "#FF0000";
+        $votes = array();
+        $file = "";
+        echo "<b>Задание № 1</b><br>";
+        
+        if (isset($_POST['vote'])) {
+            $value = $_POST['vote'];
+            $file = $value . ".txt";
+            $f = fopen($file, "r");
+        
+            $votes[$value] = fread($f, 100);
+            $votes[$value]++;
+        
+            $f = fopen($file, "w");
+            fwrite($f, $votes[$value]);
+            fclose($f);
         }
-
+        
+        // Задаем начальное количество голосов для каждого варианта ответа
+        if (!isset($votes[5])) $votes[5] = 0;
+        if (!isset($votes[4])) $votes[4] = 0;
+        if (!isset($votes[3])) $votes[3] = 0;
+        if (!isset($votes[2])) $votes[2] = 0;
+        
+        
+        if (isset($_POST['vote'])) {
+            // Перенаправление на новую страницу
+            header('Location: result.php');
+            exit();
+        }
+        
     ?>
     <form action="" method="post">
-    <input type="radio" name="vote" value=5> 5-35 чел.
-    <hr align="left" color="<?= $color ?>" size="20" width="<?=$votes?>">
-    <input type="radio" name="vote" value=4> 4-6 чел.
-    <hr align="left" color="<?= $color ?>" size="20" width="<?=$votes?>">
-    <input type="radio" name="vote" value=3> 3-7 чел.
-    <hr align="left" color="<?= $color ?>" size="20" width="<?=$votes?>">
-    <input type="radio" name="vote" value=2> 2-10 чел.
-    <hr align="left" color="<?= $color ?>" size="20" width="<?=$votes?>">
-    
+        <label for="">Как вы оцениваете "что-то"?</label><br>
+    <input type="radio" name="vote" value=5> Отлично <br>
+    <input type="radio" name="vote" value=4> Хорошо <br>
+    <input type="radio" name="vote" value=3> Удовлетворительно <br>
+    <input type="radio" name="vote" value=2> Плохо <br>
     <input type="submit">
     </form>
     </div>
