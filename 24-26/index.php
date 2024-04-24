@@ -48,11 +48,11 @@
         
     ?>
     <form action="" method="post">
-        <label for="">Как вы оцениваете "что-то"?</label><br>
-    <input type="radio" name="vote" value=5> Отлично <br>
-    <input type="radio" name="vote" value=4> Хорошо <br>
-    <input type="radio" name="vote" value=3> Удовлетворительно <br>
-    <input type="radio" name="vote" value=2> Плохо <br>
+    <label for="">Как вы оцениваете "что-то"?</label><br>
+        <input type="radio" name="vote" value=5> Отлично <br>
+        <input type="radio" name="vote" value=4> Хорошо <br>
+        <input type="radio" name="vote" value=3> Удовлетворительно <br>
+        <input type="radio" name="vote" value=2> Плохо <br>
     <input type="submit">
     </form>
     </div>
@@ -102,6 +102,40 @@
     </form>
     </div>
 </div>
+<div id="phpDiv" style="margin-top: 20px;">
+    <div class="center">
+    <?php
+        // Задание 3
+        echo "<b>Задание № 3</b><br>";
 
+        if (isset($_GET['user_link'])) {   
+            if (!empty($_GET['user_link'])) {
+                $user_link = $_GET['user_link'];
+                $file_headers = @get_headers($user_link);
+                if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+                    $exists = false;
+                    echo "<font color='red'>Данный url невозможно открыть!</font>";
+                }
+                else {
+                    $exists = true;
+                    echo "<font color='green'>Данный url работает</font>";
+                }
+            }
+        }
+    ?>
+    <form action="" method=get>
+        Введите url <input type="text" name="user_link" id="" value="http://"><br>
+        <input type="submit">
+    </form>
+    </div>
+</div>
+<div id="phpDiv" style="margin-top: 20px;">
+    <div class="center">
+    <?php
+        // Задание 4
+        echo "<b>Задание № 4</b><br>";
+    ?>
+    </div>
+</div>
 </body>
 </html>
