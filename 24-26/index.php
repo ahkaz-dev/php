@@ -134,6 +134,11 @@
     <?php
         // Задание 4
         echo "<b>Задание № 4</b><br>";
+        $path  = "https://api.openweathermap.org/data/2.5/weather?q=Belorechensk&appid=0c98dfa1ae29c1e4b4b7edb706d76649&lang=ru";
+        $response = (file_get_contents($path));
+        $resultArr = json_decode($response, TRUE);
+        
+        echo $resultArr["weather"][0]['description'];
     ?>
     </div>
 </div>
