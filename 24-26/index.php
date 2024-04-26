@@ -169,5 +169,22 @@
     </form>
     </div>
 </div>
+<div id="phpDiv" style="margin-top: 20px;">
+    <div class="center">
+    <?php
+        // Задание 5
+         echo "<b>Задание № 5</b><br>";
+
+        if (isset($_POST['inputfile'])) {
+            echo 'Размер файла ' . isset($_POST['inputfile']) . ': ' . isset($_POST['inputfile']) . ' байт <br>';
+        }
+    ?>
+    <form method = "post" enctype="multipart/form-data">
+        <label for = "inputfile">Загрузить файл</label>
+        <input type = "file" id="inputfile" name="inputfile"></br>
+        <input type = "submit">
+    </form>     
+    </div>
+</div>
 </body>
 </html>
