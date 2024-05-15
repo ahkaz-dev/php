@@ -68,8 +68,8 @@
         $resultStr = "";
 
 
-        if (isset($_POST['userName']) & isset($_POST['userTel']) & isset($_POST['userTelhome'])) {   
-            if (!empty($_POST['userName']) & !empty($_POST['userTel']) & !empty($_POST['userTelhome'])) {
+        if (isset($_POST['userName']) & isset($_POST['userTel'])) {   
+            if (!empty($_POST['userName']) & !empty($_POST['userTel'])) {
             $userName = $_POST['userName'];
             $userTel = $_POST['userTel'];    
             $userTelhome = $_POST['userTelhome'];  
@@ -175,13 +175,15 @@
         // Задание 5
          echo "<b>Задание № 5</b><br>";
 
-        if (isset($_POST['inputfile'])) {
-            echo 'Размер файла ' . isset($_POST['inputfile']) . ': ' . isset($_POST['inputfile']) . ' байт <br>';
-        }
+        // if (isset($_POST['inputfile'])) {
+        //     $num = isset($_POST['inputfile']);
+        //     echo 'Размер файла ' . $num . ': ' . filesize($num) . ' байт <br>';
+        // }
     ?>
     <form method = "post" enctype="multipart/form-data">
         <label for = "inputfile">Загрузить файл</label>
-        <input type = "file" id="inputfile" name="inputfile"></br>
+        <input type = "file" id="inputfile" name="inputfile" onchange="showFileSize(this)"></br>
+        <p id="file_size"></p>
         <input type = "submit">
     </form>     
     </div>
