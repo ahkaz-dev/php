@@ -11,19 +11,39 @@
     <div class="center">
     <?php
     date_default_timezone_set('Europe/Moscow');
-    setlocale(LC_ALL, 'da_DA');
 
 
         // Задание Timestamp: time и mktime
-         echo "<b>Timestamp: time и mktime</b><br>";
-
-        //1
-        $current_date = date('Y-m-d H:i:s', time());
-        echo $current_date;
-
+        echo "<b>Timestamp: time и mktime</b><br>";
+        
+        // 1
+        echo "Текущее время в timestamp - <span class=other>" . time() . "</span>";
         echo "<br>";
 
-        echo date("d m-а Y года", mktime(0, 0, 0, 3, 25, 2025));
+        // 2
+        $timestamp = mktime(0, 0, 0, 3, 1, 2025);
+        echo " 1 марта 2025 в timestamp - <span class=other>" . $timestamp . "</span>";
+        echo "<br>";
+
+        // 3
+        $currentYear = date("Y");
+        $timestamp = mktime(0, 0, 0, 12, 31, $currentYear);
+        echo "31 декабря текущего года - <span class=other>" . $timestamp . "</span>";
+        echo "<br>";
+
+        // 4
+        $pastTimestamp = mktime(13, 12, 59, 3, 15, 2000);
+        $currentTimestamp = time();
+        $difference = $currentTimestamp - $pastTimestamp;
+        echo "Секунды с 15.03.2000 13:12:59 - <span class=other>" . $difference . "</span>";
+        echo "<br>";
+
+        // 5 
+        $pastTimestamp = mktime(7, 23, 48, date("m"), date("d"), date("Y"));
+        $currentTimestamp = time();
+        $difference = $currentTimestamp - $pastTimestamp;
+        $hours = floor($difference / 3600);
+        echo "Кол-во часов с 7:23:48 текущего дня - <span class=other>" . $hours . "</span>";
 ?>
     </div>
 </div>
