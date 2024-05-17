@@ -47,5 +47,32 @@
 ?>
     </div>
 </div>
+<div id="phpDiv" style="margin-top: 20px;">
+    <div class="center">
+    <?php
+        // Функция date
+        echo "<b>Функция date</b><br>";    
+
+        // 1
+        echo "Дата и текущее время - <span class=other>" . date("(Y.m.d) H:i:s") . "</span>"; 
+        echo "<br>";
+
+        // 2
+        echo "Разные форматы дат: <span class=other>[" . 
+                date("Y-m-d") . ', ' . 
+                date("d.m.Y") . ', ' .  
+                date("d.m.y") . ', ' .  
+                date("H:i:s") . ', ' .  
+            "]</span>";
+        echo "<br>";
+
+        // 2 
+
+
+        // 3 
+        $week = [];
+    ?>
+    </div>
+</div>
 </body>
 </html>
