@@ -25,7 +25,7 @@
 
         // Отображение "диаграммы"
         echo "<b>Результаты голосования:</b><br>";
-    echo "<div style=display:flex>";    
+        echo "<div style=display:flex>";    
         echo "<div style=margin-right:15px>";
 
         echo "<p>" . "Отлично" . "</p>" .  "<br>";
@@ -40,22 +40,37 @@
             switch($key) {
                 case 2:
                     echo $key . " - 10 " . " чел. ";
-                    echo "<span class=smallText style=\"\">(Около $value голосов)</span>";
+                    if ($value <= 0) 
+                        echo "<span class=smallText style=\"\">(Около 0 голосов)</span>";
+                    else 
+                        echo "<span class=smallText style=\"\">(Около $value голосов)</span>";
                     break;
                 case 3:
                     echo $key . " - 7 " . " чел. ";
-                    echo "<span class=smallText style=\"\">(Около $value голосов)</span>";
+                    if ($value <= 0) 
+                        echo "<span class=smallText style=\"\">(Около 0 голосов)</span>";
+                    else                     
+                        echo "<span class=smallText style=\"\">(Около $value голосов)</span>";
                     break;
                 case 4:
                     echo $key . " - 6 " . " чел. ";
-                    echo "<span class=smallText style=\"\">(Около $value голосов)</span>";
+                    if ($value <= 0) 
+                        echo "<span class=smallText style=\"\">(Около 0 голосов)</span>";
+                    else                     
+                        echo "<span class=smallText style=\"\">(Около $value голосов)</span>";
                     break;
                 case 5:
                     echo $key . " - 35 " . " чел. ";
-                    echo "<span class=smallText style=\"\">(Около $value голосов)</span>";
+                    if ($value <= 0) 
+                        echo "<span class=smallText style=\"\">(Около 0 голосов)</span>";
+                    else                     
+                        echo "<span class=smallText style=\"\">(Около $value голосов)</span>";
                     break;
             }
-            echo "<hr align='left' color='" . $color . "' size='20' width='" . $value . "'><br>";
+            if ($value <= 0) 
+                echo "<hr align='left' color='white' size='20' width='0px'><br>";
+            else 
+                echo "<hr align='left' color='" . $color . "' size='20' width='" . $value . "'><br>";
         }
         echo "</div>";
     echo "</div>";    
