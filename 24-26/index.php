@@ -168,24 +168,55 @@
         <input type="submit">
     </form>
     </div>
+
 </div>
 <div id="phpDiv" style="margin-top: 20px;">
     <div class="center">
-    <?php
+    <p class="LtoSecondPart">
+            <a href="./index.php">Обновить страницу</a>
+    </p>
+<form method = "POST" enctype="multipart/form-data">
+   <label for="file">Выбрать файл</label><br>
+   <input type="file" name="uploadfile" /><br>
+   <input type="submit" name="submitfile" value="Загрузить" />
+</form>    
+<?php
         // Задание 5
-         echo "<b>Задание № 5</b><br>";
+        $size_listener = 10000000;
 
-        // if (isset($_POST['inputfile'])) {
-        //     $num = isset($_POST['inputfile']);
-        //     echo 'Размер файла ' . $num . ': ' . filesize($num) . ' байт <br>';
-        // }
-    ?>
-    <form method = "post" enctype="multipart/form-data">
-        <label for = "inputfile">Загрузить файл</label>
-        <input type = "file" id="inputfile" name="inputfile" onchange="showFileSize(this)"></br>
-        <p id="file_size"></p>
-        <input type = "submit">
-    </form>     
+        if (isset($_POST['submitfile'])) {   
+            try {
+                echo "<b><br>Имя файла: </b>" . $_FILES["uploadfile"]["name"] . "<br>";
+                echo "<b>Формат: </b>" . $_FILES["uploadfile"]["type"] . "<br>";
+                echo "<b>Размер: </b>" . substr($_FILES["uploadfile"]["size"] / 1048576, 0, 4) . "МБ<br>";
+                echo "<b>Размер: </b>" . $_FILES["uploadfile"]["size"] . "МБ<br>";
+
+                echo "<b>Будет сохранен в: </b> \"E:\\xampp\htdocs\php\\24-2\"<br>";
+             
+                // 10000000b = 10mb
+                if ($_FILES['uploadfile']['size'] > $size_listener) {
+                    throw new RuntimeException('<br><b style="color:red;">Слишком большой файл<b>');
+                } else {
+                    $size_listener -= $_FILES['uploadfile']['size']; 
+                }
+    
+                if (file_exists($_FILES["uploadfile"]["name"])){
+                    throw new RuntimeException('<br><b style="color:red;">Файл уже существует<b>');
+                } else {
+                   move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $_FILES["uploadfile"]["name"]);
+
+                //    echo "Осталось ". substr($size_listener / 1048576, 0, 4) . "МБ";
+                    echo "Осталось {$size_listener}<br>" . $_FILES['uploadfile']['size'];
+
+                   echo "<h3 style='color:green'>Файл был сохранен</h3>";
+                }
+            } catch (RunTimeException $e) {
+                echo $e -> getMessage();
+            }
+        }
+               
+         
+    ?> 
     </div>
 </div>
 </body>
