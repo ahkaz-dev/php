@@ -182,40 +182,40 @@
 </form>    
 <?php
         // Задание 5
-        $size_listener = 10000000;
+        $size_listener = 5 * 1024 * 1024;;
 
         if (isset($_POST['submitfile'])) {   
-            try {
-                echo "<b><br>Имя файла: </b>" . $_FILES["uploadfile"]["name"] . "<br>";
-                echo "<b>Формат: </b>" . $_FILES["uploadfile"]["type"] . "<br>";
-                echo "<b>Размер: </b>" . substr($_FILES["uploadfile"]["size"] / 1048576, 0, 4) . "МБ<br>";
-                echo "<b>Размер: </b>" . $_FILES["uploadfile"]["size"] . "МБ<br>";
-
-                echo "<b>Будет сохранен в: </b> \"E:\\xampp\htdocs\php\\24-2\"<br>";
-             
-                // 10000000b = 10mb
-                if ($_FILES['uploadfile']['size'] > $size_listener) {
-                    throw new RuntimeException('<br><b style="color:red;">Слишком большой файл<b>');
-                } else {
-                    $size_listener -= $_FILES['uploadfile']['size']; 
-                }
+            if ($size_listener > 0) {
+                try {
+                    echo "<b><br>Имя файла: </b>" . $_FILES["uploadfile"]["name"] . "<br>";
+                    echo "<b>Формат: </b>" . $_FILES["uploadfile"]["type"] . "<br>";
+                    echo "<b>Размер: </b>" . substr($_FILES["uploadfile"]["size"] / 1048576, 0, 4) . "МБ<br>";
     
-                if (file_exists($_FILES["uploadfile"]["name"])){
-                    throw new RuntimeException('<br><b style="color:red;">Файл уже существует<b>');
-                } else {
-                   move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $_FILES["uploadfile"]["name"]);
-
-                //    echo "Осталось ". substr($size_listener / 1048576, 0, 4) . "МБ";
-                    echo "Осталось {$size_listener}<br>" . $_FILES['uploadfile']['size'];
-
-                   echo "<h3 style='color:green'>Файл был сохранен</h3>";
+                    echo "<b>Будет сохранен в: </b> \"E:\\xampp\htdocs\php\\24-2\"<br>";
+                 
+                    if ($_FILES['uploadfile']['size'] > $size_listener) {
+                        throw new RuntimeException('<br><b style="color:red;">Слишком большой файл<b>');
+                    } else {
+                        $size_listener -= $_FILES['uploadfile']['size']; 
+                    }
+        
+                    if (file_exists($_FILES["uploadfile"]["name"])){
+                        throw new RuntimeException('<br><b style="color:red;">Файл уже существует<b>');
+                    } else {
+                       move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $_FILES["uploadfile"]["name"]);
+    
+                       echo "Осталось ". substr($size_listener / 1048576, 0, 4) . "МБ";
+                       echo "<h3 style='color:green'>Файл был сохранен</h3>";
+                    }
+                } catch (RunTimeException $e) {
+                    echo $e -> getMessage();
                 }
-            } catch (RunTimeException $e) {
-                echo $e -> getMessage();
+            } else {
+                echo '<br><b style="color:red;">Закончилось место<b><br>';
+                echo "Осталось ". substr($size_listener / 1048576, 0, 4) . "МБ";
             }
         }
-               
-         
+        echo "Осталось ". substr($size_listener / 1048576, 0, 4) . "МБ";
     ?> 
     </div>
 </div>
