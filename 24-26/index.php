@@ -176,116 +176,64 @@
             <a href="./index.php">Обновить страницу</a>
     </p>
     <?php
-    session_start(); // Начинаем сессию для хранения оставшейся памяти
+        session_start(); // Начинаем сессию для хранения оставшейся памяти
 
-// Максимальный объем памяти (в мегабайтах)
-$maxMemoryMB = 5; // 5MB
-$maxMemoryBytes = $maxMemoryMB * 1024 * 1024; // Переводим в байты
+        // Максимальный объем памяти (в мегабайтах)
+        $maxMemoryMB = 10; // 5MB
+        $maxMemoryBytes = $maxMemoryMB * 1024 * 1024; // Переводим в байты
 
-// Переменная для хранения оставшейся памяти в мегабайтах
-$remainingMemoryMB = isset($_SESSION['remainingMemoryMB']) ? $_SESSION['remainingMemoryMB'] : $maxMemoryMB;
+        // Переменная для хранения оставшейся памяти в мегабайтах
+        $remainingMemoryMB = isset($_SESSION['remainingMemoryMB']) ? $_SESSION['remainingMemoryMB'] : $maxMemoryMB;
 
-// Разрешенные типы файлов
-$allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        // Разрешенные типы файлов
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
-// Функция для получения текущей директории
-function getUploadDirectory() {
-    return __DIR__;
-}
+        // Функция для получения текущей директории
+        function getUploadDirectory() {
+            return __DIR__;
+        }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['uploadedFile'])) {
-    $file = $_FILES['uploadedFile'];
-    $fileSizeMB = $file['size'] / (1024 * 1024); // Размер файла в мегабайтах
-    $fileType = mime_content_type($file['tmp_name']); // Получаем MIME-тип загруженного файла
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['uploadedFile'])) {
+            $file = $_FILES['uploadedFile'];
+            $fileSizeMB = $file['size'] / (1024 * 1024); // Размер файла в мегабайтах
+            $fileType = mime_content_type($file['tmp_name']); // Получаем MIME-тип загруженного файла
 
-    // Проверяем размер файла
-    if ($fileSizeMB > $remainingMemoryMB) {
-        echo "Недостаточно памяти для загрузки файла.";
-    } elseif (!in_array($fileType, $allowedTypes)) {
-        echo "Недопустимый тип файла. Разрешены только изображения (jpg, jpeg, png, gif).";
-    } else {
-        // Путь для сохранения файла
-        $uploadPath = getUploadDirectory() . '/' . basename($file['name']);
-
-        // Проверка на дубликат
-        if (file_exists($uploadPath)) {
-            echo "Файл с таким именем уже существует. Пожалуйста, загрузите файл с другим именем.";
-        } else {
-            // Перемещаем файл в целевую директорию
-            if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-                // Уменьшаем доступную память в мегабайтах
-                $remainingMemoryMB -= $fileSizeMB;
-                $_SESSION['remainingMemoryMB'] = $remainingMemoryMB;
-
-                echo "Файл успешно загружен и сохранен в: " . $uploadPath;
+            // Проверяем размер файла
+            if ($fileSizeMB > $remainingMemoryMB) {
+                echo "Недостаточно памяти для загрузки файла.";
+            } elseif (!in_array($fileType, $allowedTypes)) {
+                echo "Недопустимый тип файла. Разрешены только изображения (jpg, jpeg, png, gif).";
             } else {
-                echo "Ошибка при сохранении файла.";
+                // Путь для сохранения файла
+                
+                $uploadPath = getUploadDirectory() . "\uploader" . '/' . basename($file['name']);
+
+                if (file_exists($uploadPath)) {
+                    echo "Файл с таким именем уже существует. Пожалуйста, загрузите файл с другим именем.";
+                } else {
+                    if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
+                        $remainingMemoryMB -= $fileSizeMB;
+                        $_SESSION['remainingMemoryMB'] = $remainingMemoryMB;
+
+                        echo "Файл успешно загружен и сохранен в: " . $uploadPath;
+                    } else {
+                        echo "Ошибка при сохранении файла.";
+                    }
+                }
             }
         }
-    }
-}
-?>
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Загрузка файла</title>
-</head>
-<body>
+    ?>
     <h1>Загрузите изображение</h1>
     <form action="" method="post" enctype="multipart/form-data">
         <input type="file" name="uploadedFile" accept="image/jpeg, image/png, image/gif" required>
         <button type="submit">Загрузить</button>
     </form>
     <p>Оставшаяся память: <?php echo round($remainingMemoryMB, 2); ?> MB</p>
-</body>
-</html>
-
-    
-<!-- <form method = "POST" enctype="multipart/form-data">
-   <label for="file">Выбрать файл</label><br>
-   <input type="file" name="uploadfile" /><br>
-   <input type="submit" name="submitfile" value="Загрузить" />
-</form>    
-<?php
-        // Задание 5
-        $size_listener = 5 * 1024 * 1024;;
-
-        if (isset($_POST['submitfile'])) {   
-            if ($size_listener > 0) {
-                try {
-                    echo "<b><br>Имя файла: </b>" . $_FILES["uploadfile"]["name"] . "<br>";
-                    echo "<b>Формат: </b>" . $_FILES["uploadfile"]["type"] . "<br>";
-                    echo "<b>Размер: </b>" . substr($_FILES["uploadfile"]["size"] / 1048576, 0, 4) . "МБ<br>";
-    
-                    echo "<b>Будет сохранен в: </b> \"E:\\xampp\htdocs\php\\24-2\"<br>";
-                 
-                    if ($_FILES['uploadfile']['size'] > $size_listener) {
-                        throw new RuntimeException('<br><b style="color:red;">Слишком большой файл<b>');
-                    } else {
-                        $size_listener -= $_FILES['uploadfile']['size']; 
-                    }
-        
-                    if (file_exists($_FILES["uploadfile"]["name"])){
-                        throw new RuntimeException('<br><b style="color:red;">Файл уже существует<b>');
-                    } else {
-                       move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $_FILES["uploadfile"]["name"]);
-    
-                       echo "Осталось ". substr($size_listener / 1048576, 0, 4) . "МБ";
-                       echo "<h3 style='color:green'>Файл был сохранен</h3>";
-                    }
-                } catch (RunTimeException $e) {
-                    echo $e -> getMessage();
-                }
-            } else {
-                echo '<br><b style="color:red;">Закончилось место<b><br>';
-                echo "Осталось ". substr($size_listener / 1048576, 0, 4) . "МБ";
-            }
-        }
-        echo "Осталось ". substr($size_listener / 1048576, 0, 4) . "МБ";
-    ?>  -->
+    <form action="file-upload.php" method="get">
+        <button type="submit">Посмотреть файлы</button>
+    </form>
     </div>
+
 </div>
 </body>
 </html>
