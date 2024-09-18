@@ -114,24 +114,24 @@
         // день недели на русском языке.
         function find_date($date_num) {
             $date = array(1=>"Понедельник", 2=>"Вторник", 3=>"Среда", 4=>"Четверг", 5=>"Пятница", 6=>"Суббота", 7=>"Воскресенье");
+        
             foreach($date as $key => $value) {
-                if ($date_num == $key) {
+                if ((int)$date_num == $key) {
                     return $value;
-                } else {
-                    return "Пусто"; 
                 }
             }
+            return "Пусто";
         }
 
         $date_num;
         if (isset($_GET['numeric_date'])) {
             $date_num = $_GET['numeric_date'];
             if (is_numeric($date_num)) {
-                echo "Сегодня: " . find_date($date_num);
+                echo "Сегодня: " . find_date((int)$date_num);
             } else {
                 echo "Вы ввели не число!";
             }
-        }    
+        }   
     ?>
     <form action="" method="get">
         Введите число от 1-7 <input type="text" name="numeric_date">

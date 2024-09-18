@@ -83,12 +83,6 @@
             exit();
             }
         }
-        
-        // if (isset($_POST['userName']) & isset($_POST['userTel']) & isset($_POST['userTelhome'])) { 
-        //     $userName = $_POST['userName'];
-        //     $userTel = $_POST['userTel'];    
-        //     $userTelhome = $_POST['userTelhome'];  
-        //  }
     ?>
     <form method="POST">
         <label >Введите данные</label><br>
@@ -233,7 +227,6 @@
         <button type="submit">Посмотреть файлы</button>
     </form>
     </div>
-
 </div>
 </body>
 </html>
