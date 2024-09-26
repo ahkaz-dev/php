@@ -127,35 +127,47 @@
     <div class="center">
     <?php
         // Задание 4
-        // echo "<b>Задание № 4</b><br>";
+        echo "<b>Задание № 4</b><br>";
 
-        // $user_city = "Moscow";
-        // $img = "";
-        // if (isset($_GET['user_city'])) {   
-        //     if (!empty($_GET['user_city'])) {
-        //         $user_city = $_GET['user_city'];
-        //         $path  = "https://api.openweathermap.org/data/2.5/weather?q=" . $user_city . "&appid=0c98dfa1ae29c1e4b4b7edb706d76649&lang=ru";
-        //     }
-        // } else {
-        //     $path  = "https://api.openweathermap.org/data/2.5/weather?q=" . $user_city . "&appid=0c98dfa1ae29c1e4b4b7edb706d76649&lang=ru";
+        $user_city = "Moscow";
+        $img = "";
 
-        // }
-        // // путь к запросу на сервер по получению погоды
-        // // получаем содержимое страицы по заданному пути
-        // $response = (file_get_contents($path));
-        // // распарсим json на массив 
-        // $resultArr = json_decode($response, TRUE);
-        
-        // echo "Погода в $user_city: " . $resultArr["weather"][0]['description'];
-        // switch($resultArr["weather"][0]['description']) {
-        //     case "ясно": echo "<img src=\"https://openweathermap.org/img/wn/01d@2x.png\" style=\"width: 70px;filter: drop-shadow(0px 15px 28px orange);\">"; break;
-        //     case "пасмурно": echo "<img src=\"http://openweathermap.org/img/wn/03d@2x.png\" style=\"width: 70px;filter: drop-shadow(0px 15px 28px #000000);\">"; break;
-        //     case "дождь": echo "<img src=\"http://openweathermap.org/img/wn/10d@2x.png\" style=\"width: 70px;filter: drop-shadow(0px 15px 28px #000000);\">"; break;
-    
-        // }
-        // echo "<br>";
-        // $feelliketemp = $resultArr["main"]['feels_like'];
-        // echo "Средняя температура: " . substr($feelliketemp, 0, 2);
+        // Массив настроек для запроса с SSL
+        $arrContextOptions=array(
+            "ssl"=>array(
+                "verify_peer"=>false,
+                "verify_peer_name"=>false,
+            ),
+        );
+
+        if (isset($_GET['user_city'])) {   
+            if (!empty($_GET['user_city'])) {
+                $user_city = $_GET['user_city'];
+                $path  = "https://api.openweathermap.org/data/2.5/weather?q=" . $user_city . "&appid=0c98dfa1ae29c1e4b4b7edb706d76649&lang=ru";
+            
+                // путь к запросу на сервер по получению погоды
+                // получаем содержимое страицы по заданному пути
+                $response = (file_get_contents($path, false, stream_context_create($arrContextOptions)));
+                // распарсим json на массив 
+                $resultArr = json_decode($response, TRUE);
+                
+                echo "Погода в $user_city: " . $resultArr["weather"][0]['description'];
+                switch($resultArr["weather"][0]['description']) {
+                    case "ясно": echo "<img src=\"https://openweathermap.org/img/wn/01d@2x.png\" style=\"width: 70px;filter: drop-shadow(0px 15px 28px orange);\">"; break;
+                    case "пасмурно": echo "<img src=\"http://openweathermap.org/img/wn/03d@2x.png\" style=\"width: 70px;filter: drop-shadow(0px 15px 28px #000000);\">"; break;
+                    case "дождь": echo "<img src=\"http://openweathermap.org/img/wn/10d@2x.png\" style=\"width: 70px;filter: drop-shadow(0px 15px 28px #000000);\">"; break;
+            
+                }
+                
+                echo "<br>";
+                $feelliketemp = $resultArr["main"]['feels_like'];
+                echo "Средняя температура: " . substr($feelliketemp, 0, 2);
+            }
+        } else {
+            $path  = "https://api.openweathermap.org/data/2.5/weather?q=" . $user_city . "&appid=0c98dfa1ae29c1e4b4b7edb706d76649&lang=ru";
+
+        }
+
   ?>
       <form action="" method=get>
         Введите ваш город <input type="text" name="user_city" id=""><br><br>
