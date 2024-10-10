@@ -230,6 +230,41 @@
         } catch (Exception $e) {
             echo "Ошибка обновления данных";
         }
+            
+        try {
+            $query = mysqli_query($conn, $query = "UPDATE workers SET age=35 WHERE id=4");
+        
+            echo "Сотрудники с id = 4 получили новый возраст = 35<br>";
+        } catch (Exception $e) {
+            echo "Ошибка обновления данных";
+        }
+
+        try {
+            $query = mysqli_query($conn, $query = "UPDATE workers SET salary=700 WHERE salary=500");
+        
+            echo "Сотрудники с зарплатой = 500 получили новую в размере = 700<br>";
+        } catch (Exception $e) {
+            echo "Ошибка обновления данных";
+        }
+
+        try {
+            $query = mysqli_query($conn, $query = "UPDATE workers SET age=23 WHERE id > 2 AND id <= 5");
+        
+            echo "Сотрудники с id (3-5) получили новый возраст = 23<br>";
+        } catch (Exception $e) {
+            echo "Ошибка обновления данных";
+        }
+
+        try {
+            $query =  mysqli_query($conn, "INSERT INTO workers SET name='Вася', age=26, salary=700");
+
+            $query = mysqli_query($conn, $query = "UPDATE workers SET name='Евгений', salary = salary + 500 WHERE name = 'Вася'");
+        
+            echo "Сотрудник Вася теперь Евгений получили к зарплате +500<br>";
+        } catch (Exception $e) {
+            echo "Ошибка обновления данных";
+        }
+            
     ?>
     </div>
 </div>    
