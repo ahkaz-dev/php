@@ -3,50 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Капча</title>
+    <title>Авторизация</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form action="" method="post">
-        Введите логин <input type="text" name="usLogin" id=""><br><br>
-        Введите пароль <input type="text" name="usPass" id="">
-        <br><br><br>
+    <form action="" method="post" class="login-form">
+    <label for="usLogin">Введите логин</label>
+    <input type="text" name="usLogin" id="usLogin" required placeholder="Логин">
 
-        Пройдите проверку <input type="text" name="usCapcha" id="">        
-        <br><br>
-        <button type="submit">Войти</button>
-    </form>
+    <label for="usPass">Введите пароль</label>
+    <input type="password" name="usPass" id="usPass" required placeholder="Пароль">
+
+    <label for="usCapcha">Пройдите проверку</label>
+    <input type="text" name="usCapcha" id="usCapcha" required placeholder="Капча">
+
     <?php
+        session_start();
+        $_SESSION['flash_message'] = "I'm a flash message'";
+        
         $dbUser = "is4Zakhar";
         $dbPass = "xg4PAEO)nk3IZ6qy";
         $dbname = "isfourtestbd";
         $conn = mysqli_connect("localhost", $dbUser, $dbPass, $dbname);
 
         $capchaGen = substr(bin2hex(random_bytes(16)), 0, 5);
-        echo $capchaGen;
+        echo "<u class='ucapcha'>$capchaGen</u>";
         $sql = "INSERT INTO capcha (capchaText) VALUES ('$capchaGen')";
         $conn -> query($sql);
         
         if (isset($_POST["usLogin"]) && isset($_POST["usPass"]) && !empty($_POST["usLogin"]) && !empty($_POST["usPass"])) {
             $userLogin = $_POST["usLogin"];
             $userPass = $_POST["usPass"];
+            
+            $qlog = $conn -> query("SELECT * FROM userdata WHERE userLogin = '$userLogin'");
+            $qpass = $conn -> query("SELECT * FROM userdata WHERE userPassword = '$userPass'");
 
             if (isset($_POST["usCapcha"]) and !empty($_POST["usCapcha"])) {
                 $usCapcha = $_POST["usCapcha"];
                 $result = $conn -> query("SELECT * FROM capcha WHERE capchaText = '$usCapcha'");
 
-                if ($result->num_rows > 0) {
-                    header('Location: http://localhost/php/capcha/style.css');
-                } else {
-                    echo "<br>Неправильная капча!!";     
+                if ($result->num_rows > 0 AND ($qlog->num_rows > 0) AND ($qpass->num_rows > 0)) {
+                    try {
+                        $conn -> query("DELETE FROM capcha WHERE capchaText = '$usCapcha'");
+                        $conn -> query("DELETE FROM capcha WHERE id >= 1");
+                        $conn -> query("ALTER TABLE capcha AUTO_INCREMENT = 1");
+
+                        header('Location: http://localhost/php/capthatest/access.php');
+                    } catch (Exception){
+                        echo "<br><br>no<br><br>";
+                    }
+                } elseif (!($qlog->num_rows > 0) AND !($qpass->num_rows > 0)) {
+                    echo "<br><span class='error'>Ошибка: Данного пользователя не существует</span><br>";
+                } 
+                else {
+                    $conn -> query("DELETE FROM capcha WHERE capchaText = '$usCapcha'");
+                    $conn -> query("DELETE FROM capcha WHERE id >= 1");
+                    $conn -> query("ALTER TABLE capcha AUTO_INCREMENT = 1");
+                        
+                    echo "<br><span class='error'>Ошибка: Неправильная капча!!</span><br>";
                 }
             } else {
-                echo "<br>Введите капчу!";     
+                echo "<br><span class='error'>Ошибка: Введите капчу!</span>";     
             }
         }  else {
-            echo "<br>Введите пароль И логин";     
+            echo "<br><span class='error'>Ошибка: Введите пароль И логин</span>";     
         }
         mysqli_close($conn);
     ?>
+        <button type="submit">Войти</button>
+        </form>
 </body>
 </html>

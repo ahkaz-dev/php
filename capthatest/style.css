@@ -1,6 +1,69 @@
 body {
-    text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 20px;
-    padding-top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4; /* Светлый фон */
+    font-family: cursive;
+}
+
+.login-form {
+    background-color: #ffffff; /* Белый фон для формы */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень для глубины */
+    width: 300px; /* Ширина формы */
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px; /* Отступ между меткой и полем ввода */
+}
+
+.login-form input {
+    width: calc(100% - 10px); /* Полная ширина с учетом отступа */
+    padding: 8px;
+    margin-bottom: 15px; /* Отступ между полями ввода */
+    border: 1px solid #ccc; /* Светлая граница */
+    border-radius: 4px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Цвет кнопки */
+    color: white; /* Цвет текста на кнопке */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Плавный переход цвета */
+}
+
+.login-form button:hover {
+    background-color: #0056b3; /* Темнее при наведении */
+}
+.ucapcha {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(235, 235, 235);
+    align-items: center;
+    height: 50px;
+    font-size: 30px;
+    text-decoration: none;
+    color: rgb(131, 131, 131);
+}
+.error {
+    color: red;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.flash {
+    height: 50px;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(220, 255, 207);
+
 }
