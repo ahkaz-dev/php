@@ -38,6 +38,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease; /* Плавный переход цвета */
+    margin-top: 10px;
 }
 
 .login-form button:hover {
@@ -57,13 +58,4 @@ body {
     color: red;
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
-}
-.flash {
-    height: 50px;
-    font-size: 25px;
-    display: flex;
-    justify-content: center;
-    background-color: rgb(220, 255, 207);
-
 }
